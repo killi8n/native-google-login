@@ -1,5 +1,6 @@
 package com.nativegooglelogin
 
+import android.app.Activity
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -11,14 +12,24 @@ class NativeGoogleLoginModule(reactContext: ReactApplicationContext) : ReactCont
         return "NativeGoogleLogin"
     }
 
-    // Example method
-    // See https://facebook.github.io/react-native/docs/native-modules-android
     @ReactMethod
-    fun multiply(a: Int, b: Int, promise: Promise) {
-    
-      promise.resolve(a * b)
-    
+    fun googleSignIn(promise: Promise) {
+      var util: GoogleSignInUtil = GoogleSignInUtil(reactApplicationContext)
+      var currentReactActivity: Activity? = currentActivity
+      if (currentReactActivity != null) {
+        util.signIn(currentReactActivity, promise)
+      }
     }
 
-    
+    @ReactMethod
+    fun googleSignOut(promise: Promise) {
+      var util: GoogleSignInUtil = GoogleSignInUtil(reactApplicationContext);
+      util.signOut(promise);
+    }
+
+    @ReactMethod
+    fun googleDisconnect(promise: Promise) {
+      var util: GoogleSignInUtil = GoogleSignInUtil(reactApplicationContext);
+      util.disconnect(promise)
+    }
 }
