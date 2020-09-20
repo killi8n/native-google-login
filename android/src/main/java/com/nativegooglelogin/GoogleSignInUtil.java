@@ -99,7 +99,7 @@ public class GoogleSignInUtil {
             accountMap.putString("givenName", account.getGivenName());
             accountMap.putString("userId", account.getId());
             accountMap.putString("idToken", account.getIdToken());
-            reactPromise.resolve(account);
+            reactPromise.resolve(accountMap);
           }
         } catch (ApiException e) {
           e.printStackTrace();
