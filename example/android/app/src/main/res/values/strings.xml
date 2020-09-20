@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NativeGoogleLogin Example</string>
+<!--  android google sign in server client id -->
+    <string name="server_client_id"></string>
 </resources>
