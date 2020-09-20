@@ -1,17 +1,43 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import NativeGoogleLogin from 'native-google-login';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    NativeGoogleLogin.multiply(3, 7).then(setResult);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Button
+        title="Google Sign In"
+        onPress={async () => {
+          try {
+            const result = await NativeGoogleLogin.googleSignIn();
+            console.log(result);
+          } catch (e) {
+            console.error(e);
+          }
+        }}
+      />
+      <Button
+        title="Google Sign Out"
+        onPress={async () => {
+          try {
+            const result = await NativeGoogleLogin.googleSignOut();
+            console.log(result);
+          } catch (e) {
+            console.error(e);
+          }
+        }}
+      />
+      <Button
+        title="Google Disconnect"
+        onPress={async () => {
+          try {
+            const result = await NativeGoogleLogin.googleDisconnect();
+            console.log(result);
+          } catch (e) {
+            console.error(e);
+          }
+        }}
+      />
     </View>
   );
 }

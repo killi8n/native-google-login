@@ -1,7 +1,25 @@
 import { NativeModules } from 'react-native';
 
+interface GoogleSignInResult {
+  userId: string;
+  idToken: string;
+  givenName: string;
+  familyName: string;
+  email: string;
+}
+
+interface GoogleSignOutResult {
+  success: boolean;
+}
+
+interface GoogleDisconnectResult {
+  success: boolean;
+}
+
 type NativeGoogleLoginType = {
-  multiply(a: number, b: number): Promise<number>;
+  googleSignIn: () => Promise<GoogleSignInResult>;
+  googleSignOut: () => Promise<GoogleSignOutResult>;
+  googleDisconnect: () => Promise<GoogleDisconnectResult>;
 };
 
 const { NativeGoogleLogin } = NativeModules;
