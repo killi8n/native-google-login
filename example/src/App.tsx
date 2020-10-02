@@ -3,6 +3,9 @@ import { StyleSheet, View, Button } from 'react-native';
 import NativeGoogleLogin from 'native-google-login';
 
 export default function App() {
+  React.useEffect(() => {
+    NativeGoogleLogin.configure({ webClientId: 'OAUTH_WEB_CLIENT_ID' });
+  }, []);
   return (
     <View style={styles.container}>
       <Button

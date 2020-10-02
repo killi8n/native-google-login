@@ -6,6 +6,17 @@ class NativeGoogleLogin: NSObject, GIDSignInDelegate {
     var rejecter: RCTPromiseRejectBlock?
     
     @objc
+    func configure(_ configureOptions: NSDictionary) {
+        if let webClientId = configureOptions["webClientId"] {
+            guard let webClientId = webClientId as? String else {
+                return
+            }
+            guard let sharedInstance = GIDSignIn.sharedInstance() else { return }
+            sharedInstance.serverClientID = webClientId
+        }
+    }
+    
+    @objc
     func googleSignIn(_ resolve: @escaping RCTPromiseResolveBlock, withRejecter reject: @escaping RCTPromiseRejectBlock) {
         DispatchQueue.main.async {
             guard let sharedInstance = GIDSignIn.sharedInstance() else { return }

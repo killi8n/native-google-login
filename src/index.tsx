@@ -16,7 +16,12 @@ interface GoogleDisconnectResult {
   success: boolean;
 }
 
+interface ConfigureParams {
+  webClientId?: string;
+}
+
 type NativeGoogleLoginType = {
+  configure: (params: ConfigureParams) => void;
   googleSignIn: () => Promise<GoogleSignInResult>;
   googleSignOut: () => Promise<GoogleSignOutResult>;
   googleDisconnect: () => Promise<GoogleDisconnectResult>;

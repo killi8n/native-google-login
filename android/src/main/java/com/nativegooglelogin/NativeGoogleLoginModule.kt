@@ -1,16 +1,21 @@
 package com.nativegooglelogin
 
 import android.app.Activity
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.Promise
+import com.facebook.react.bridge.*
 
 class NativeGoogleLoginModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
     override fun getName(): String {
         return "NativeGoogleLogin"
     }
+
+    @ReactMethod
+    fun configure(configureMap: ReadableMap) {
+      configureMap.getString("webClientId")?.let { id ->
+        GoogleSignInUtil.webClientId = id;
+      }
+    }
+
 
     @ReactMethod
     fun googleSignIn(promise: Promise) {

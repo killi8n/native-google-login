@@ -25,15 +25,22 @@ public class GoogleSignInUtil {
   public static int REQUEST_CODE = 100;
   public GoogleSignInClient googleSignInClient;
   public Promise reactPromise;
+  public static String webClientId = "";
   public GoogleSignInUtil(ReactApplicationContext reactContext) {
     createGoogleSignInClient(reactContext);
     reactContext.addActivityEventListener(new GoogleSignInActivityEventListener());
   }
-  public void createGoogleSignInClient(ReactApplicationContext context) {
-    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-      .requestEmail()
-      .build();
 
+  public GoogleSignInOptions getSignInOptions() {
+    GoogleSignInOptions.Builder builder = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+      .requestEmail();
+    if (GoogleSignInUtil.webClientId != null && GoogleSignInUtil.webClientId.length() > 0) {
+      builder.requestIdToken(GoogleSignInUtil.webClientId);
+    }
+    return builder.build();
+  }
+  public void createGoogleSignInClient(ReactApplicationContext context) {
+    GoogleSignInOptions gso = getSignInOptions();
     googleSignInClient = GoogleSignIn.getClient(context, gso);
   }
 

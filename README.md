@@ -84,6 +84,7 @@ implementation 'com.google.android.gms:play-services-auth:18.1.0'
 import GoogleLogin from "native-google-login";
 
 const google = async () => {
+    const configure = GoogleLogin.configure({ webClientId: "WEB_OAUTH_CLIENT_ID" }) // in android, you need to provide webClientId to get idToken
     const signInResult = await GoogleLogin.googleSignIn()
     const signOutResult = await GoogleLogin.googleSignOut()
     const disconnectResult = await GoogleLogin.googleDisconnect()

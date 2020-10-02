@@ -55,7 +55,7 @@ static void InitializeFlipper(UIApplication *application) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [Util initializeGoogleSignInOauthClientId:@""];
+  [Util initializeGoogleSignInOauthClientId:@"IOS_OAUTH_CLIENT_ID"];
   return YES;
 }
 
